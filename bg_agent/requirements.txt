@@ -1,0 +1,5 @@
+streamlit
+openai
+google-cloud-bigquery
+google-auth
+python-dotenv
