@@ -16,8 +16,18 @@ st.set_page_config(
 # ── CSS personalizado ─────────────────────────────────────────────────────────
 st.markdown("""
     <style>
-        header[data-testid="stHeader"] { background-color: #0A0A0A; }
-        button[kind="primary"] { background-color: #0A0A0A; }
+        /* Texto del sidebar en negro (sobreescribe el blanco global) */
+        [data-testid="stSidebar"] * {
+            color: #000000 !important;
+        }
+        /* Texto del input del chat en negro */
+        [data-testid="stChatInput"] textarea {
+            color: #000000 !important;
+        }
+        /* Respuesta del asistente en blanco */
+        [data-testid="stChatMessage"] p {
+            color: #FFFFFF !important;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -190,7 +200,6 @@ if prompt := st.chat_input("Ex: What were the top 5 products sold this month?"):
 
 # ── Sidebar ──────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.image("bg_agent/assets/jeeves_logo.png", width=120)
     st.divider()
     st.markdown("**Example questions:**")
     st.markdown("- How many deals closed this month?")
