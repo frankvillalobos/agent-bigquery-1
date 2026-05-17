@@ -190,7 +190,7 @@ if prompt := st.chat_input("Ex: What were the top 5 products sold this month?"):
 
 # ── Sidebar ──────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.image("assets/logo_jeeves.png", width=150)
+    st.image("assets/jeeves_logo.png", width=150)
     st.divider()
     st.markdown("**Example questions:**")
     st.markdown("- How many deals closed this month?")
