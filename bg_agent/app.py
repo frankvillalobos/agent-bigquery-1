@@ -24,7 +24,7 @@ st.markdown("""
 # ── Logo y título  ←  AQUÍ, fuera del set_page_config ────────────────────────
 col1, col2 = st.columns([1, 5])
 with col1:
-    st.image("assets/logo_jeeves.png", width=120)
+    st.image("assets/jeeves_logo.png", width=120)
 with col2:
     st.title("RevOps Agent")
     st.caption("Make questions in English about your dataset.")
