@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#d5bb6e"        # botones, links, elementos activos
+backgroundColor = "#000000"                # fondo de la página
+secondaryBackgroundColor = "#d5bb6e"       # fondo del sidebar y inputs
+textColor = "#FFFFFF"                      # color del texto principal
+font = "sans serif"
