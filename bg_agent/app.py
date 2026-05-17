@@ -24,7 +24,7 @@ st.markdown("""
 # ── Logo y título  ←  AQUÍ, fuera del set_page_config ────────────────────────
 col1, col2 = st.columns([1, 5])
 with col1:
-    st.image("assets/jeeves_logo.png", width=120)
+    st.image("bg_agent/assets/jeeves_logo.png", width=120)
 with col2:
     st.title("RevOps Agent")
     st.caption("Make questions in English about your dataset.")
@@ -190,7 +190,7 @@ if prompt := st.chat_input("Ex: What were the top 5 products sold this month?"):
 
 # ── Sidebar ──────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.image("assets/jeeves_logo.png", width=150)
+    st.image("bg_agent/assets/jeeves_logo.png", width=120)
     st.divider()
     st.markdown("**Example questions:**")
     st.markdown("- How many deals closed this month?")
