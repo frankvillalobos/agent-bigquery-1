@@ -179,7 +179,7 @@ def get_tools_openai(project_id: str, dataset_id: str) -> list:
     ]
 
 # ── Input del usuario ────────────────────────────────────────────────────────
-if prompt := st.chat_input("Ex: What were the top 5 products sold this month?"):
+if prompt := st.chat_input("Ex: What '%' of annual quota has each country achieved through closed-won deals?"):
 
     with st.chat_message("user"):
         st.markdown(prompt)
@@ -201,7 +201,6 @@ if prompt := st.chat_input("Ex: What were the top 5 products sold this month?"):
 # ── Sidebar ──────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.divider()
-    st.markdown("**This dataset simulates a full-year (2024) B2B sales pipeline for Jeeves. It contains one row per deal/opportunity — covering all stages of the sales funnel.**")
     st.markdown("**Example Queries:**")
     st.markdown("- What % of annual quota has each country achieved through closed-won deals?")
     st.markdown("- Which channel closes the highest percentage of deals?")
