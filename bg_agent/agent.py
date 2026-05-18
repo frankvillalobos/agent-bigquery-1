@@ -8,18 +8,18 @@ def run_agent(user_question: str, project_id: str, dataset_id: str):
     bq = BigQueryClient(project_id)
     tools = get_tools(project_id, dataset_id)
 
-    system_prompt = f"""Eres un analista de datos experto en BigQuery.
-Dataset disponible: proyecto `{project_id}`, dataset `{dataset_id}`.
+    system_prompt = f"""You are an expert data analyst in BigQuery.
+Dataset available: project `{project_id}`, dataset `{dataset_id}`.
 
-Proceso que SIEMPRE debes seguir:
-1. Llama a `get_schema` para ver las tablas disponibles.
-2. Construye la SQL correcta basándote en el esquema.
-3. Llama a `run_sql_query` con esa SQL.
-4. En tu respuesta final incluí SIEMPRE:
-   - La query SQL generada en un bloque de código SQL
-   - Los resultados explicados en lenguaje natural y claro
+Process you should ALWAYS follow:
+1. Call `get_schema` to see the available tables.
+2. Build the correct SQL based on the schema.
+3. Call `run_sql_query` with that SQL.
+4. In your final answer, ALWAYS include:
+   - The SQL query generated in a block of SQL code
+   - The results explained in natural and clear language
 
-Usa Standard SQL de BigQuery con nombres completos de tabla:
+Use BigQuery Standard SQL with fully qualified table names:
 `{project_id}.{dataset_id}.nombre_tabla`"""
 
     # ✅ Tipo correcto: list de MessageParam en lugar de list de dict genérico
@@ -61,15 +61,15 @@ Usa Standard SQL de BigQuery con nombres completos de tabla:
                 sql = str(tool_input.get("sql", ""))
                 try:
                     if not bq.is_safe_query(sql):
-                        result = "Error: la query contiene operaciones no permitidas."
+                        result = "Error: The query contains disallowed operations."
                     else:
                         rows = bq.run_query(sql)
                         result = json.dumps(rows[:50], default=str)
-                        print(f"📊 Filas obtenidas: {len(rows)}")
+                        print(f"📊 Rows obtained: {len(rows)}")
                 except Exception as e:
-                    result = f"Error al ejecutar SQL: {e}"
+                    result = f"Error executing SQL: {e}"
             else:
-                result = f"Herramienta desconocida: {tool_name}"
+                result = f"Unknown tool: {tool_name}"
 
             tool_results.append({
                 "type": "tool_result",
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     DATASET_ID = "dataset_demand"
 
     preguntas = [
-        "¿Cuáles son los 5 productos más vendidos este mes?",
+        "What percentage of annual quota has each country achieved through closed-won deals?",
     ]
 
     for pregunta in preguntas:

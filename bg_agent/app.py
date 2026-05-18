@@ -36,8 +36,8 @@ col1, col2 = st.columns([1, 5])
 with col1:
     st.image("bg_agent/assets/jeeves_logo.png", width=120)
 with col2:
-    st.title("RevOps Agent")
-    st.caption("Make questions in English about your dataset.")
+    st.title("RevOps Query Assistant Agent")
+    st.caption("I'll help you write a SQL Query")
 
 PROJECT_ID = "uean-493522"
 DATASET_ID = "dataset_demand"
@@ -201,10 +201,11 @@ if prompt := st.chat_input("Ex: What were the top 5 products sold this month?"):
 # ── Sidebar ──────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.divider()
-    st.markdown("**Example questions:**")
-    st.markdown("- How many deals closed this month?")
-    st.markdown("- What is the average deal size?")
-    st.markdown("- Which rep has the most pipeline?")
+    st.markdown("**This dataset simulates a full-year (2024) B2B sales pipeline for Jeeves. It contains one row per deal/opportunity — covering all stages of the sales funnel.**")
+    st.markdown("**Example Queries:**")
+    st.markdown("- What % of annual quota has each country achieved through closed-won deals?")
+    st.markdown("- Which channel closes the highest percentage of deals?")
+    st.markdown("- Columns available: deal_id, country, segment, channel, rep_name, hire_date, partner_type, deal_stage, close_date, create_date, sales_cycle_days, acv_usd, tpv_usd, is_won, lost_reason, quarter, month, monthly_quota_usd, annual_quota_usd, ramp_factor")
 
     st.divider()
     if st.button("🗑️ Clear conversation"):

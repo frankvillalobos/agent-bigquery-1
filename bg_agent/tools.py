@@ -3,8 +3,8 @@ def get_tools(project_id: str, dataset_id: str) -> list:
         {
             "name": "get_schema",
             "description": (
-                "Obtiene el esquema del dataset de BigQuery: tablas y columnas disponibles. "
-                "Llamar esto PRIMERO antes de generar cualquier SQL."
+                "Gets the BigQuery dataset schema: available tables and columns."
+                "Call this FIRST before generating any SQL."
             ),
             "input_schema": {
                 "type": "object",
@@ -15,15 +15,15 @@ def get_tools(project_id: str, dataset_id: str) -> list:
         {
             "name": "run_sql_query",
             "description": (
-                "Ejecuta una query SQL en BigQuery y retorna los resultados. "
-                f"El proyecto es `{project_id}` y el dataset es `{dataset_id}`."
+                "Execute an SQL query in BigQuery and return the results."
+                f"The Project is `{project_id}` and the dataset is `{dataset_id}`."
             ),
             "input_schema": {
                 "type": "object",
                 "properties": {
                     "sql": {
                         "type": "string",
-                        "description": "Query SQL válida para BigQuery Standard SQL."
+                        "description": "Valid SQL query for BigQuery Standard SQL."
                     }
                 },
                 "required": ["sql"]
