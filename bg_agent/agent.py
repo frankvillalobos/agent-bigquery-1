@@ -8,18 +8,17 @@ def run_agent(user_question: str, project_id: str, dataset_id: str):
     bq = BigQueryClient(project_id)
     tools = get_tools(project_id, dataset_id)
 
-    system_prompt = f"""You are an expert data analyst in BigQuery.
-Dataset available: project `{project_id}`, dataset `{dataset_id}`.
+    system_prompt = f"""Eres un experto en análisis de datos inmobiliarios en BigQuery.
+Dataset disponible: project `{project_id}`, dataset `{dataset_id}`.
 
-Process you should ALWAYS follow:
-1. Call `get_schema` to see the available tables.
-2. Build the correct SQL based on the schema.
-3. Call `run_sql_query` with that SQL.
-4. In your final answer, ALWAYS include:
-   - The SQL query generated in a block of SQL code
-   - The results explained in natural and clear language
+Proceso que SIEMPRE debes seguir:
+1. Llamar `get_schema` para ver las tablas disponibles.
+2. Construir la query SQL correcta en base al schema.
+3. Llamar `run_sql_query` con ese SQL.
+4. En tu respuesta final, SIEMPRE incluey:
+   - La query SQL generada en un bloque de código SQL
 
-Use BigQuery Standard SQL with fully qualified table names:
+Usa BigQuery estándar SQL con los nombres de las tablas correctamente: 
 `{project_id}.{dataset_id}.nombre_tabla`"""
 
     # ✅ Tipo correcto: list de MessageParam en lugar de list de dict genérico
@@ -61,13 +60,13 @@ Use BigQuery Standard SQL with fully qualified table names:
                 sql = str(tool_input.get("sql", ""))
                 try:
                     if not bq.is_safe_query(sql):
-                        result = "Error: The query contains disallowed operations."
+                        result = "Error: La query contiene operaciones no permitidas"
                     else:
                         rows = bq.run_query(sql)
                         result = json.dumps(rows[:50], default=str)
                         print(f"📊 Rows obtained: {len(rows)}")
                 except Exception as e:
-                    result = f"Error executing SQL: {e}"
+                    result = f"Error ejecutando SQL: {e}"
             else:
                 result = f"Unknown tool: {tool_name}"
 
@@ -93,7 +92,7 @@ if __name__ == "__main__":
     DATASET_ID = "dataset_demand"
 
     preguntas = [
-        "What percentage of annual quota has each country achieved through closed-won deals?",
+        "¿Cuántos leads se generaron en Buenos Aires el mes pasado?",
     ]
 
     for pregunta in preguntas:

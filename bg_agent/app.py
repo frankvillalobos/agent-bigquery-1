@@ -8,7 +8,7 @@ from bigquery_client import BigQueryClient
 
 # ── Configuración de página ───────────────────────────────────────────────────
 st.set_page_config(
-    page_title="RevOps Agent",
+    page_title="Asistente de SQL",
     page_icon="🔍",
     layout="wide"
 )
@@ -34,10 +34,10 @@ st.markdown("""
 # ── Logo y título  ←  AQUÍ, fuera del set_page_config ────────────────────────
 col1, col2 = st.columns([1, 5])
 with col1:
-    st.image("bg_agent/assets/jeeves_logo.png", width=120)
+    st.image("bg_agent/assets/logo-zpa.webp", width=120)
 with col2:
-    st.title("RevOps Query Assistant Agent")
-    st.caption("I'll help you write a SQL Query")
+    st.title("Asistente de SQL")
+    st.caption("Te ayudaré a escribir un código SQL!")
 
 PROJECT_ID = "uean-493522"
 DATASET_ID = "dataset_demand"
@@ -62,15 +62,14 @@ def run_agent(user_question: str) -> str:
     system_prompt = f"""You are an expert data analyst in BigQuery.
 Available dataset: project `{PROJECT_ID}`, dataset `{DATASET_ID}`.
 
-Process you MUST ALWAYS follow:
-1. Call get_schema to see the available tables.
-2. Build the correct SQL based on the schema.
-3. Call run_sql_query with that SQL.
-4. In your final response ALWAYS include:
-   - The SQL query generated in a SQL code block
-   - The results explained in clear natural language
+Proceso que SIEMPRE debes seguir:
+1. Llamar `get_schema` para ver las tablas disponibles.
+2. Construir la query SQL correcta en base al schema.
+3. Llamar `run_sql_query` con ese SQL.
+4. En tu respuesta final, SIEMPRE incluey:
+   - La query SQL generada en un bloque de código SQL
 
-Use BigQuery Standard SQL with full table names:
+Usa BigQuery estándar SQL con los nombres de las tablas correctamente: 
 `{PROJECT_ID}.{DATASET_ID}.table_name`"""
 
     st.session_state.api_messages.append({
@@ -179,7 +178,7 @@ def get_tools_openai(project_id: str, dataset_id: str) -> list:
     ]
 
 # ── Input del usuario ────────────────────────────────────────────────────────
-if prompt := st.chat_input("Ex: What '%' of annual quota has each country achieved through closed-won deals?"):
+if prompt := st.chat_input("Ejemplo: ¿Cuántos leads se generaron en Buenos Aires en enero?"):
 
     with st.chat_message("user"):
         st.markdown(prompt)
@@ -201,10 +200,10 @@ if prompt := st.chat_input("Ex: What '%' of annual quota has each country achiev
 # ── Sidebar ──────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.divider()
-    st.markdown("**Example Queries:**")
-    st.markdown("- What % of annual quota has each country achieved through closed-won deals?")
-    st.markdown("- Which channel closes the highest percentage of deals?")
-    st.markdown("- Columns available: deal_id, country, segment, channel, rep_name, hire_date, partner_type, deal_stage, close_date, create_date, sales_cycle_days, acv_usd, tpv_usd, is_won, lost_reason, quarter, month, monthly_quota_usd, annual_quota_usd, ramp_factor")
+    st.markdown("**Ejemplos:**")
+    st.markdown("- ¿Cómo calcular el Conversion Rate?")
+    st.markdown("- ¿En qué ciudades hay más leads?")
+
 
     st.divider()
     if st.button("🗑️ Clear conversation"):
